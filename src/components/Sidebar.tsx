@@ -13,8 +13,18 @@ const GET_LESSON_QUERY = gql`
   }
 `;
 
+interface GetLessonsQueryResponse {
+  Lessons: {
+    id: string;
+    title: string;
+    slug: string;
+    availableAt: string;
+    lessonType: "live" | "class";
+  }[];
+}
+
 export function Sidebar() {
-  const { data } = useQuery(GET_LESSON_QUERY);
+  const { data } = useQuery<GetLessonsQueryResponse>(GET_LESSON_QUERY);
 
   return (
     <aside className="w-[348px] bg-gray-700 p-6 border-l border-gray-600">
