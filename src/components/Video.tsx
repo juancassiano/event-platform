@@ -10,11 +10,12 @@ import {
 import "@vime/core/themes/default.css";
 
 const GET_LESSON_BY_SLUG_QUERY = gql`
-  query GetLessonBySlug($Slug: String) {
-    lesson(where: { slug: "" }) {
-      videoId
+  query GET_LESSON_BY_SLUG($slug: String) {
+    lesson(where: { slug: $slug }) {
+      id
       title
       description
+      videoId
       teacher {
         avatarURL
         bio
@@ -26,6 +27,7 @@ const GET_LESSON_BY_SLUG_QUERY = gql`
 
 interface GetLessonBySlugResponse {
   lesson: {
+    id: string;
     title: string;
     videoId: string;
     description: string;
@@ -61,7 +63,7 @@ export function Video(props: VideoProps) {
       <div className="bg-black flex justify-center">
         <div className="h-full w-full max-w[1100px] max-h[60vh] aspect-video">
           <Player>
-            <Youtube videoId={data.lesson.videoId} />
+            <Youtube videoId={data.lesson.videoId} key={data.lesson.videoId} />
             <DefaultUi />
           </Player>
         </div>
