@@ -1,6 +1,14 @@
+import { useState, FormEvent } from "react";
 import { Logo } from "../components/Logo";
 
 export function Subscribe() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  function handleSubscribe(event: FormEvent) {
+    event.preventDefault();
+  }
+
   return (
     <div className="min-h-screen bg-blur bg-cover bg-no-repeat flex flex-col items-center">
       <div className="w-full max-w-[1100px] flex items-center justify-between mt-20 mx-auto">
@@ -24,17 +32,22 @@ export function Subscribe() {
             Inscreva-se gratuitamente
           </strong>
 
-          <form action="" className="flex flex-col gap-2 w-full">
+          <form
+            onSubmit={handleSubscribe}
+            className="flex flex-col gap-2 w-full"
+          >
             <input
               type="text"
               placeholder="Seu nome completo"
               className="bg-gray-900 rounded px-5 h-14"
+              onChange={(event) => setName(event.target.value)}
             ></input>
 
             <input
               type="email"
               placeholder="Digite seu e-mail"
               className="bg-gray-900 rounded px-5 h-14"
+              onChange={(event) => setEmail(event.target.value)}
             ></input>
 
             <button
